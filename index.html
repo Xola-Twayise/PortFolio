@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Xola Twayise · AI &amp; Automation Engineer</title>
+  <meta name="description" content="Portfolio of Xola Twayise, an AI &amp; Automation Engineer building AI agents, document intelligence and enterprise integrations, with an AI twin that runs entirely in your browser." />
+  <meta name="theme-color" content="#05060f" />
+  <meta property="og:title" content="Xola Twayise · AI &amp; Automation Engineer" />
+  <meta property="og:description" content="Ask my in-browser AI twin anything about my work." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Boot sequence -->
+  <div id="boot" aria-hidden="true">
+    <div class="boot-inner">
+      <div class="boot-logo">XT<span>//</span>OS</div>
+      <pre id="boot-log"></pre>
+      <div class="boot-bar"><i></i></div>
+    </div>
+  </div>
+
+  <canvas id="neural-bg" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#top" class="logo" aria-label="Home">XT<span>.</span>AI</a>
+    <nav class="nav-links" id="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#match">Job Match</a>
+      <a href="#experience">Journey</a>
+      <a href="#certs">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <span class="ai-chip" id="ai-chip" title="AI engine status"><i></i><b>AI idle</b></span>
+      <button class="kbd-btn" id="open-palette" aria-label="Open command palette"><kbd>Ctrl</kbd><kbd>K</kbd></button>
+      <button class="menu-btn" id="menu-btn" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-hud">
+        <span class="hud-tag">// IDENTITY.VERIFIED</span>
+        <span class="hud-tag right" id="clock">--:--:-- SAST</span>
+      </div>
+      <div class="hero-grid"><div class="hero-copy">
+      <h1 class="glitch" id="hero-name" data-text="XOLA TWAYISE">XOLA TWAYISE</h1>
+      <p class="hero-role mono">&gt; <span id="typed"></span><span class="caret">_</span></p>
+      <p class="hero-sub" id="hero-summary"></p>
+      <div class="hero-cta">
+        <button class="btn primary" id="cta-ai"><span>⟁</span> Talk to my AI twin</button>
+        <a class="btn ghost" href="#projects">View projects →</a>
+        <a class="btn ghost" id="cv-btn" hidden download>Download CV ⤓</a>
+      </div>
+      <div class="hero-stats" id="hero-stats"></div>
+      </div>
+      <div class="hero-portrait tilt" aria-hidden="true">
+        <div class="ring r1"></div><div class="ring r2"></div>
+        <div class="portrait-frame"><img id="portrait-img" alt="" /><div class="portrait-fallback">XT</div><div class="scan-beam"></div></div>
+        <span class="hud-label l1 mono">ID · XOLA_TWAYISE</span>
+        <span class="hud-label l2 mono">MATCH 99.7%</span>
+      </div>
+      </div>
+      <div class="scroll-hint mono">SCROLL ↓</div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="section-head"><span class="idx mono">01</span><h2>About</h2><span class="line"></span></div>
+      <div class="about-grid">
+        <div class="about-text" id="about-text"></div>
+        <div class="holo-card tilt">
+          <figure class="holo-photo"><img id="about-img" alt="Xola Twayise outdoors in the Eastern Cape mountains" /><div class="portrait-fallback">XT</div></figure>
+          <ul class="holo-meta mono" id="holo-meta"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="section-head"><span class="idx mono">02</span><h2>Skill Matrix</h2><span class="line"></span></div>
+      <div class="skills-grid" id="skills-grid"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="section-head"><span class="idx mono">03</span><h2>Projects</h2><span class="line"></span></div>
+      <div class="semantic-search">
+        <span class="ss-icon">⌕</span>
+        <input id="project-search" type="search" autocomplete="off" placeholder="Search by meaning, e.g. “something with games” or “logistics data”" aria-label="Semantic project search" />
+        <span class="ss-badge mono" id="ss-badge">AI SEARCH</span>
+      </div>
+      <div class="projects-grid" id="projects-grid"></div>
+    </section>
+
+    <!-- JOB MATCH -->
+    <section id="match" class="section">
+      <div class="section-head"><span class="idx mono">04</span><h2>Job Match Analyzer</h2><span class="line"></span></div>
+      <p class="section-lead">Recruiter? Paste a job description. My AI compares each requirement against my experience, in your browser, and shows where I fit and where the gaps are.</p>
+      <div class="match-grid">
+        <div class="glass match-input">
+          <textarea id="jd" rows="10" placeholder="Paste a job description here…&#10;&#10;e.g. We need a C#/.NET engineer with ASP.NET Core API experience, React and TypeScript, CI/CD pipelines, and integration with third-party logistics systems."></textarea>
+          <div class="match-actions">
+            <button class="btn ghost small" id="jd-sample">Use sample</button>
+            <button class="btn primary small" id="jd-run">Analyze fit ⟶</button>
+          </div>
+        </div>
+        <div class="glass match-output" id="match-output">
+          <div class="match-empty mono">AWAITING INPUT<span class="caret">_</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="section-head"><span class="idx mono">05</span><h2>Journey</h2><span class="line"></span></div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certs" class="section">
+      <div class="section-head"><span class="idx mono">06</span><h2>Credentials</h2><span class="line"></span></div>
+      <div class="certs-grid">
+        <div class="certs-list" id="certs-list"></div>
+        <figure class="glass beyond">
+          <img id="event-img" alt="Xola Twayise at a tech event" />
+          <div class="portrait-fallback">XT</div>
+          <figcaption><b>Beyond the code</b><span id="strengths"></span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-head"><span class="idx mono">07</span><h2>Open a Channel</h2><span class="line"></span></div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="section-lead">Have a project, a role or just an idea? Send a message and it will open in your email app, ready to send.</p>
+          <button class="email-big mono" id="copy-email" title="Copy email"></button>
+          <div class="socials" id="socials"></div>
+        </div>
+        <form class="glass contact-form" id="contact-form">
+          <label>Your name<input name="name" required maxlength="80" /></label>
+          <label>Subject<input name="subject" required maxlength="120" /></label>
+          <label>Message<textarea name="message" rows="5" required maxlength="3000"></textarea></label>
+          <button class="btn primary" type="submit">Transmit ⟶</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer mono">
+    <span>© <span id="year"></span> Xola Twayise</span>
+    <span>Built with in-browser AI · Hosted free on GitHub Pages</span>
+  </footer>
+
+  <!-- AI TWIN DOCK -->
+  <button class="ai-launcher" id="ai-launcher" aria-label="Open AI twin">
+    <span class="orb"></span><span class="mono">ASK AI</span>
+  </button>
+
+  <aside class="ai-panel" id="ai-panel" aria-label="AI twin chat" aria-hidden="true">
+    <div class="ai-head">
+      <div class="ai-id">
+        <span class="orb small"></span>
+        <div><b>XOLA.AI</b><small class="mono" id="ai-sub">Neural twin · in-browser</small></div>
+      </div>
+      <div class="ai-tools">
+        <button id="tts-toggle" class="icon-btn" title="Read answers aloud" aria-pressed="false">🔈</button>
+        <button id="ai-close" class="icon-btn" title="Close" aria-label="Close">✕</button>
+      </div>
+    </div>
+    <div class="boost-row">
+      <label class="switch">
+        <input type="checkbox" id="boost-toggle" />
+        <span class="slider"></span>
+      </label>
+      <div>
+        <b>Neural Boost</b>
+        <small id="boost-info">Runs a small LLM on your GPU (WebGPU, ~300 MB download once)</small>
+      </div>
+    </div>
+    <div class="progress" id="ai-progress" hidden><i></i><span class="mono"></span></div>
+    <div class="ai-log" id="ai-log" role="log" aria-live="polite"></div>
+    <div class="ai-suggest" id="ai-suggest"></div>
+    <form class="ai-input" id="ai-form">
+      <button type="button" id="mic-btn" class="icon-btn" title="Speak your question" aria-label="Voice input">🎙</button>
+      <input id="ai-text" autocomplete="off" placeholder="Ask me anything…" aria-label="Message" />
+      <button type="submit" class="send" aria-label="Send">➤</button>
+    </form>
+  </aside>
+
+  <!-- COMMAND PALETTE -->
+  <div class="palette" id="palette" hidden>
+    <div class="palette-box glass">
+      <input id="palette-input" placeholder="Type a command or ask a question…" autocomplete="off" />
+      <ul id="palette-list"></ul>
+      <div class="palette-foot mono">↑↓ navigate · Enter run · Esc close · anything else asks the AI</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
